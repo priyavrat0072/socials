@@ -9,6 +9,8 @@ import CommentIcon from './CommentIcon'
 import MailIcon from './MailIcon'
 import LockIcon from './LockIcon'
 import UserIcon from './UserIcon'
+import HeartIcon from './HeartIcon'
+import PlusIcon from './PlusIcon'
 
 
 const icons = {
@@ -20,6 +22,8 @@ const icons = {
     mail : MailIcon,
     lock : LockIcon,
     user : UserIcon,
+    heart : HeartIcon,
+    plus : PlusIcon
 }
 
 
