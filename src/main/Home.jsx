@@ -41,19 +41,7 @@ const Home = ({userProp}) => {
   return (
     <ScreenWrapper>
       <View>
-        <Text style={{fontSize:24,fontWeight:'900',textAlign:'center'}}>{user.email}</Text>
-        <Text style={{fontSize:24,fontWeight:'900',textAlign:'center'}}>{user.uid}</Text>
-        {
-          userProfile?(
-            <View>
-            <Text style={{fontSize:24,fontWeight:'900',textAlign:'center'}}>{userProfile.email}</Text>
-            <Text style={{fontSize:24,fontWeight:'900',textAlign:'center'}}>{userProfile.createAt}</Text>
-            
-            </View>
-          ):<Text>User not loaded</Text>
-        }
-
-        <Button title="Log-Out" onPress={() => {logout();}}/>
+        <Text>HEllo</Text>
       </View>
     </ScreenWrapper>
   );
