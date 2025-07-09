@@ -1,28 +1,46 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import Welcome from './src/screens/Welcome';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Login from './src/screens/login';
+import Routes from './src/router/Routes';
+import { NavigationContainer } from '@react-navigation/native';
+import AuthRoutes, { HomeRoutes } from './src/router/auth-navigation';
+import auth from '@react-native-firebase/auth';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+
+const App = () => {
+  const [user, setUser] = useState<any>('');
+
+   
+
+
+  useEffect(() => {
+      const userCheck = auth().onAuthStateChanged(userExist => {
+      if (userExist) setUser(userExist);
+      else setUser('');
+    });
+    return () => {
+      userCheck();
+    };
+  }, []);
+
+  // useEffect(()=>{
+  //   console.log('userAuth----------',user)
+  // },[user])
+
+
 
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NewAppScreen templateFileName="App.tsx" />
-    </View>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        {user !== "" ? <HomeRoutes userData={user}/> : <AuthRoutes/>}
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+};
 
 export default App;
+
+const styles = StyleSheet.create({});
