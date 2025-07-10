@@ -11,29 +11,13 @@ import Avatar from '../components/Avatar';
 
 const Home = ({userProp}) => {
 
-  
-  const navigation = useNavigation()
-  const user = userProp.userData._user
-  const [userProfile,setUserProfile] = useState()
-  // console.log('userIdHome----------',user.uid)
-  // console.log('userProps------',userProp.userData._user.email)
-  
+ 
+   const userProfile = userProp.userData
+    //  console.log('userProfileinhome---------',userProfile)
+    const navigation = useNavigation()
 
-  useEffect(()=>{
-    const fetchUserProfile=async()=>{
-      const data = await getUserData(user)
-      // console.log('data=======',data)
-      setUserProfile(data)
-    }
-    if(user){
-      fetchUserProfile()
-    }
-  },[user])
-  
-  // console.log('userProfiledataHomeFile',userProfile.createAt)
   
   const logout = () => {
-    
     auth()
       .signOut()
       .then(res => {
@@ -46,6 +30,7 @@ const Home = ({userProp}) => {
 
   return (
     <ScreenWrapper bg={'white'}>
+
       <View style={styles.container}>
         <View style={styles.header}>
             <Text style={styles.title}>LinkUp</Text>
@@ -56,7 +41,7 @@ const Home = ({userProp}) => {
               <Pressable onPress={()=>{navigation.navigate('newPost')}}>
                 <Icon name="plus" size={hp(3.2)} color={theme.colors.text}  />
               </Pressable>
-              <Pressable onPress={()=>{navigation.navigate('profile')}}>
+              <Pressable onPress={()=>{navigation.navigate('profile',{userProfileData:userProfile})}}>
                 <Avatar
                   uri={userProfile?.image}
                   size={hp(4.3)}
@@ -64,6 +49,7 @@ const Home = ({userProp}) => {
                   style={{borderWidth:2}}
                 />
               </Pressable>
+               
             </View>
         </View>
         

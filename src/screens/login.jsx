@@ -29,7 +29,7 @@ const Login = () => {
     setLoading(true)
     try {
       const newReg = await auth().signInWithEmailAndPassword(email,password);
-      navigation.navigate("home")
+      // navigation.navigate("home")
        console.log('Sign in done')
        Alert.alert('Login successfully!');
        return newReg;
