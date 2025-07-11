@@ -12,6 +12,8 @@ import UserIcon from './UserIcon'
 import HeartIcon from './HeartIcon'
 import PlusIcon from './PlusIcon'
 import Logout from './Logout'
+import EditIcon from './EditIcon'
+import LocationIcon from './LocationIcon'
 
 
 const icons = {
@@ -26,6 +28,8 @@ const icons = {
     heart : HeartIcon,
     plus : PlusIcon,
     logout : Logout,
+    edit : EditIcon,
+    location : LocationIcon
 }
 
 

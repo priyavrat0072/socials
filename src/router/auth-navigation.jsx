@@ -8,6 +8,7 @@ import Home from '../main/Home';
 import Notification from '../main/Notification';
 import Profile from '../main/Profile';
 import NewPost from '../main/NewPost';
+import EditProfile from '../main/EditProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,13 +34,14 @@ const AuthRoutes = () => {
   );
 };
 
-export const HomeRoutes = props => {
+export const HomeRoutes = () => {
   // console.log('props',props)
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="home"
-        children={() => <Home userProp={props} />}
+        component={Home}
+        // children={() => <Home userProp={props} />}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -57,7 +59,11 @@ export const HomeRoutes = props => {
         component={NewPost}
         options={{ headerShown: false }}
       />
-
+      <Stack.Screen
+        name="editProfile"
+        component={EditProfile}
+        options={{ headerShown: false }}
+      />
 
     </Stack.Navigator>
   );
