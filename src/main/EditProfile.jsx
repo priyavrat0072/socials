@@ -1,4 +1,4 @@
-import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Alert, Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import ScreenWrapper from '../components/ScreenWrapper'
 import Header from '../components/Header'
@@ -8,10 +8,15 @@ import { getUserImageSrc } from '../services/imageService'
 import { theme } from '../constants/theme'
 import Icon from '../assets/icons'
 import Input from '../components/Input'
+import Button from '../components/Button'
+import { updateUserData } from '../services/userService'
+import { useNavigation } from '@react-navigation/native'
 
 const EditProfile = () => {
 
+  const navigation = useNavigation()
   const {userProviderContext, setUserProviderContext} = useContext(UserContext)
+  const [loading,setLoading] = useState(false)
   const [user, setUser] = useState({
     name:'',
     phoneNumber:'',
@@ -33,7 +38,27 @@ const EditProfile = () => {
   },[userProviderContext])
   
   const onImagePick=async()=>{}
+
+  const onSubmit=async()=>{
+      let userData = {...user}
+      let {name,phoneNumber,address,bio,image} = userData
+      if(!name || !phoneNumber || !address || !bio){
+        Alert.alert('Profile',"Please fill all details")
+        return;
+      }
+      setLoading(true)
+      // Update User
+
+      const res = await updateUserData(userProviderContext,userData)
+      setLoading(false)
+      setUserProviderContext({...userProviderContext,...userData})
+      navigation.goBack()
+  }
+
+
   let imageSource = getUserImageSrc(user.image)
+
+
   return (
     <ScreenWrapper bg={'white'}>
         <View style={styles.container}>
@@ -73,9 +98,9 @@ const EditProfile = () => {
                   containerStyle = {styles.bio}
                   value = {user.bio}
                   onChangeText={value=>setUser({...user,bio:value})}
-                  
                 />
-               
+                <Button title={'Update'} loading={loading} onPress={onSubmit}  />
+
               </View>
           </ScrollView>
         </View>

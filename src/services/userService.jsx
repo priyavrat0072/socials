@@ -10,3 +10,13 @@ export const getUserData=async(user)=>{
         console.log(error,'Error in fetch userProfile in service class')
     }
 }
+
+export const updateUserData=async(user,userData)=>{
+    try {
+      await firebase.database().ref(`users/${user.uid}`).update(userData)
+      let response = await getUserData(user)
+      return response  
+    } catch (error) {
+         console.log(error,'Error in updating userProfile in service class')
+    }
+}
